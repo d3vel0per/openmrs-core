@@ -100,7 +100,7 @@
          <plugin>
              <groupId>org.eclipse.jetty</groupId>
              <artifactId>jetty-maven-plugin</artifactId>
-             <version>9.4.35.v20201120</version>
+             <version>11.0.6</version>
              <configuration>
                <webApp>
                	  <descriptor>${project.build.directory}/jetty/WEB-INF/web.xml</descriptor>
@@ -230,6 +230,26 @@
 				  <header>${project.parent.basedir}/license-header.txt</header>
 			  </configuration>
 		  </plugin>
+		  <plugin>
+              <groupId>org.codehaus.cargo</groupId>
+              <artifactId>cargo-maven3-plugin</artifactId>
+              <version>1.9.7</version>
+              <configuration>
+                  <container>
+                      <containerId>tomcat9x</containerId>
+                      <type>embedded</type>
+                  </container>
+                  <deployables>
+                      <deployable>
+                          <type>war</type>
+                          <location>${project.build.directory}/${project.build.finalName}.war</location>
+                          <properties>
+                              <context>/${webapp.name}</context>
+                          </properties>
+                      </deployable>
+                  </deployables>
+              </configuration>
+          </plugin>
       </plugins>
       <extensions>
             <!-- Prevents this error, with JDK 11 and above: -->
