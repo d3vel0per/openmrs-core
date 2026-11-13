@@ -13,6 +13,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.openmrs.Diagnosis;
+import org.openmrs.DiagnosisAttribute;
+import org.openmrs.DiagnosisAttributeType;
 import org.openmrs.Encounter;
 import org.openmrs.Patient;
 import org.openmrs.Visit;
@@ -23,7 +25,7 @@ import org.openmrs.Visit;
  * @since 2.2
  */
 public interface DiagnosisDAO {
-	
+
 	/**
 	 * Saves the diagnosis
 	 *
@@ -32,7 +34,7 @@ public interface DiagnosisDAO {
 	 * @throws DAOException exception thrown if error occurs while saving the diagnosis
 	 */
 	Diagnosis saveDiagnosis(Diagnosis diagnosis) throws DAOException;
-	
+
 	/**
 	 * Gets a diagnosis from database using the diagnosis id
 	 *
@@ -57,7 +59,7 @@ public interface DiagnosisDAO {
 	 * @throws DAOException exception thrown if error occurs while deleting the diagnosis
 	 */
 	void deleteDiagnosis(Diagnosis diagnosis) throws DAOException;
-	
+
 	/**
 	 * @see org.openmrs.api.DiagnosisService#getDiagnosesByEncounter(Encounter, boolean, boolean)
 	 */
@@ -73,8 +75,37 @@ public interface DiagnosisDAO {
 	 *
 	 * @param patient the patient whose active diagnoses are being queried.
 	 * @param fromDate the start date for the check of active diagnosis
-	 *                    
 	 * @return all active diagnoses associated with the specified patient.
 	 */
 	List<Diagnosis> getActiveDiagnoses(Patient patient, Date fromDate);
+
+	/**
+	 * @see org.openmrs.api.DiagnosisService#getAllDiagnosisAttributeTypes()
+	 */
+	List<DiagnosisAttributeType> getAllDiagnosisAttributeTypes() throws DAOException;
+
+	/**
+	 * @see org.openmrs.api.DiagnosisService#getDiagnosisAttributeTypeById(Integer)
+	 */
+	DiagnosisAttributeType getDiagnosisAttributeTypeById(Integer id) throws DAOException;
+
+	/**
+	 * @see org.openmrs.api.DiagnosisService#getDiagnosisAttributeTypeByUuid(String)
+	 */
+	DiagnosisAttributeType getDiagnosisAttributeTypeByUuid(String uuid) throws DAOException;
+
+	/**
+	 * @see org.openmrs.api.DiagnosisService#saveDiagnosisAttributeType(DiagnosisAttributeType)
+	 */
+	DiagnosisAttributeType saveDiagnosisAttributeType(DiagnosisAttributeType diagnosisAttributeType) throws DAOException;
+
+	/**
+	 * @see org.openmrs.api.DiagnosisService#deleteDiagnosisAttributeType(DiagnosisAttributeType)
+	 */
+	void deleteDiagnosisAttributeType(DiagnosisAttributeType diagnosisAttributeType) throws DAOException;
+
+	/**
+	 * @see org.openmrs.api.DiagnosisService#getDiagnosisAttributeByUuid(String)
+	 */
+	DiagnosisAttribute getDiagnosisAttributeByUuid(String uuid) throws DAOException;
 }
